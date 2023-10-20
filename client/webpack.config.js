@@ -9,20 +9,17 @@ module.exports = {
   entry: "./src/index.jsx",
   output: {
     path: path.resolve(__dirname, "build"),
-    publicPath: "/",
   },
   resolve: { extensions },
   devServer: {
     client: {
       overlay: false,
     },
-
-    historyApiFallback: true,
   },
   module: {
     rules: [
       {
-        test: /\.js|\.jsx$/,
+        test: /\.jsx?$/i,
         use: [
           {
             loader: "babel-loader",

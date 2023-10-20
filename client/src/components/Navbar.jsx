@@ -6,7 +6,7 @@ import { Link, NavLink } from "react-router-dom";
 import Web3Context from ".././contexts";
 
 const Navbar = () => {
-  // const { connectWallet, account } = useContext(Web3Context);
+  const { connectWallet, account } = useContext(Web3Context);
 
   console.log(Web3Context);
 
@@ -47,8 +47,8 @@ const Navbar = () => {
         <div className="flex items-center justify-center">
           <button
             type="submit"
-            class="mb-2  mt-4 bg-[#FFA500] px-6  py-3 text-center  text-sm font-medium uppercase text-white hover:opacity-80"
-            // onClick={connectWallet}
+            className="mb-2  mt-4 bg-[#FFA500] px-6  py-3 text-center  text-sm font-medium uppercase text-white hover:opacity-80"
+            onClick={connectWallet}
           >
             Connect Wallet
           </button>

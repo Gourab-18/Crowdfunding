@@ -22,6 +22,8 @@ const Web3Provider = ({ children }) => {
     try {
       const { ethereum } = window;
 
+      
+
       if (!ethereum) {
         alert("Get MetaMask!");
         return;
@@ -85,7 +87,7 @@ const Web3Provider = ({ children }) => {
 
   return (
     <Web3Context.Provider
-      value={{ connectWallet, checkIfWalletIsConnected, account, Contract }}
+      value={{ connectWallet, checkIfWalletIsConnected, account, contract }}
     >
       {children}
     </Web3Context.Provider>
