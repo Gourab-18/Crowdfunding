@@ -8,7 +8,9 @@ import Web3Context from ".././contexts";
 const Navbar = () => {
   const { connectWallet, account } = useContext(Web3Context);
 
-  console.log(Web3Context);
+  // console.log('Account')
+
+  // console.log(account);
 
   const arr = ["Add Cause", "Donate", "All Causes"];
   const items = new Map([

@@ -1,7 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
+import { useContext } from "react";
+import { donateMoney } from "../contexts/useContracts/writeContracts";
+import Web3Context from "../contexts";
 
 export const Donate = () => {
+  const { contract, account } = useContext(Web3Context);
+
+  const [cause, setCause] = useState("");
+  const [amount, setAmount] = useState(0);
+
+ 
+
+  const handleCause = (e) => {
+    setCause(e.target.value);
+  };
+
+  const handleAmount = (e) => {
+    setAmount(e.target.value);
+  };
+
+  const handleDonation = async (e) => {
+    e.preventDefault();
+
+    await donateMoney(contract, account.currentAccount, cause, amount);
+  };
+
   return (
     <>
       {/* <Navbar /> */}
@@ -22,7 +46,7 @@ export const Donate = () => {
                 type="text"
                 className=" block  w-[50vw] border border-gray-300  bg-[rgb(65,66,67)] p-2.5 text-sm text-gray-900 dark:text-white dark:placeholder-gray-400"
                 required
-                //   value={amount}
+                onChange={handleCause}
               />
             </div>
             <div className="my-4">
@@ -33,7 +57,7 @@ export const Donate = () => {
                 type="number"
                 className=" block  w-[50vw] border border-gray-300  bg-[rgb(65,66,67)] p-2.5 text-sm text-gray-900 dark:text-white dark:placeholder-gray-400"
                 required
-                //   value={reason}
+                onChange={handleAmount}
               />
             </div>
           </form>
@@ -42,6 +66,7 @@ export const Donate = () => {
             <button
               type="submit"
               class="mb-2  mt-4 bg-[rgb(210,65,134)] px-6  py-3 text-center  text-sm font-medium uppercase text-white hover:opacity-80"
+              onClick={handleDonation}
             >
               Add
             </button>

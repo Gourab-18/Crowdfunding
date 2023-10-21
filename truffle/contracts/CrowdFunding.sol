@@ -12,6 +12,7 @@ contract CrowdFunding {
     }
 
     mapping(string => Cause) public mp;
+    string[] public causes;
 
     address public owner;
 
@@ -29,6 +30,7 @@ contract CrowdFunding {
         Cause memory obj;
 
         obj = Cause(cause, 0, target, dead, false);
+        causes.push(cause);
 
         mp[cause] = obj;
     }
@@ -48,6 +50,9 @@ contract CrowdFunding {
     function distributeMoney(string memory _cause) public payable {
         payable(mp[_cause].person).transfer(mp[_cause].target);
         mp[_cause].ok = true;
-        mp[_cause].money = 0;
+    }
+
+    function returnCauseNames() public view returns (string[] memory) {
+        return causes;
     }
 }

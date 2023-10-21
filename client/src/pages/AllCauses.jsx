@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../components/Navbar";
+import Web3Context from "../contexts";
+import { getCauses } from "../contexts/useContracts/readContracts";
+import { useState, useContext } from "react";
+
 export const AllCauses = () => {
   var shows = ["Hii", "Bye"];
+
+  const { contract, account } = useContext(Web3Context);
+
+  useEffect(() => {
+    console.log("Contract changed");
+    DisplayAllCauses();
+  }, [contract]);
+
+  const DisplayAllCauses = async () => {
+    await getCauses(contract);
+  };
+
   return (
     <>
       {/* <Navbar /> */}
@@ -12,7 +28,7 @@ export const AllCauses = () => {
         <div className="relative w-[80vw] bg-[rgb(55,56,56)] shadow-md  sm:rounded-lg">
           <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400">
             <thead className="text-xs uppercase dark:text-gray-400">
-              <tr classNameName="text-slate-10 font-sans font-semibold">
+              <tr className="text-slate-10 font-sans font-semibold">
                 <th scope="col" className="px-6 py-3  ">
                   Cause
                 </th>
@@ -31,9 +47,12 @@ export const AllCauses = () => {
               </tr>
             </thead>
             <tbody>
-              {shows?.map(() => {
+              {shows?.map((show, index) => {
                 return (
-                  <tr className="text-slate-10 border-b border-gray-200 font-sans font-semibold dark:border-gray-700">
+                  <tr
+                    className="text-slate-10 border-b border-gray-200 font-sans font-semibold dark:border-gray-700"
+                    key={index}
+                  >
                     <th
                       scope="row"
                       className="whitespace-nowrap px-6 py-4 font-medium text-gray-900  dark:text-white"

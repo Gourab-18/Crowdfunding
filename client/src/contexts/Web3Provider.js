@@ -21,8 +21,7 @@ const Web3Provider = ({ children }) => {
   const connectWallet = async () => {
     try {
       const { ethereum } = window;
-
-      
+      // console.log(ethereum);
 
       if (!ethereum) {
         alert("Get MetaMask!");
@@ -31,8 +30,6 @@ const Web3Provider = ({ children }) => {
       const accounts = await ethereum.request({
         method: "eth_requestAccounts",
       });
-
-      // console.log('Connected', accounts[0]);
     } catch (error) {
       console.log(error);
     }
@@ -69,7 +66,7 @@ const Web3Provider = ({ children }) => {
     }
   };
   const getContract = (chain) => {
-    //console.log(provider,signer);
+    console.log("Chain is", chain);
     var web3 = new Web3(window.ethereum);
 
     //const networkId = await web3.eth.net.getId();
@@ -79,9 +76,7 @@ const Web3Provider = ({ children }) => {
       FakeNewsApp.abi,
       deployedNetwork && deployedNetwork.address
     );
-    //console.log(account.currentAccount)
 
-    //console.log(instance)
     setContract(instance);
   };
 

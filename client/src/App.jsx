@@ -5,17 +5,24 @@ import { Donate } from "./pages/Donate";
 import { AllCauses } from "./pages/AllCauses";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
+import { useEffect, useContext } from "react";
+
 function App() {
+  const { checkIfWalletIsConnected } = useContext(Web3Context);
+
+  useEffect(() => {
+    checkIfWalletIsConnected();
+  }, []);
   return (
     <>
-        <div className="min-w-screen min-h-[100vh] bg-[#000000]">
-          <Navbar />
-          <Routes>
-            <Route exact path="/" element={<AddCause />}></Route>
-            <Route path="/Donate" element={<Donate />}></Route>
-            <Route path="/AllCauses" element={<AllCauses />}></Route>
-          </Routes>
-        </div>
+      <div className="min-w-screen min-h-[100vh] bg-[#000000]">
+        <Navbar />
+        <Routes>
+          <Route exact path="/" element={<AddCause />}></Route>
+          <Route path="/Donate" element={<Donate />}></Route>
+          <Route path="/AllCauses" element={<AllCauses />}></Route>
+        </Routes>
+      </div>
     </>
   );
 }
