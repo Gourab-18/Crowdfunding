@@ -65,7 +65,7 @@ export const Donate = () => {
           <div className="flex items-center justify-center">
             <button
               type="submit"
-              class="mb-2  mt-4 bg-[rgb(210,65,134)] px-6  py-3 text-center  text-sm font-medium uppercase text-white hover:opacity-80"
+              className="mb-2  mt-4 bg-[rgb(210,65,134)] px-6  py-3 text-center  text-sm font-medium uppercase text-white hover:opacity-80"
               onClick={handleDonation}
             >
               Add

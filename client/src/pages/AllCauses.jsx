@@ -7,6 +7,8 @@ import { useState, useContext } from "react";
 export const AllCauses = () => {
   var shows = ["Hii", "Bye"];
 
+  const [causes, setCauses] = useState([]);
+
   const { contract, account } = useContext(Web3Context);
 
   useEffect(() => {
@@ -15,8 +17,12 @@ export const AllCauses = () => {
   }, [contract]);
 
   const DisplayAllCauses = async () => {
-    await getCauses(contract);
+    const temp = await getCauses(contract);
+
+    setCauses(temp);
   };
+
+  console.log("Causes are the following", causes);
 
   return (
     <>
@@ -47,27 +53,30 @@ export const AllCauses = () => {
               </tr>
             </thead>
             <tbody>
-              {shows?.map((show, index) => {
-                return (
-                  <tr
-                    className="text-slate-10 border-b border-gray-200 font-sans font-semibold dark:border-gray-700"
-                    key={index}
-                  >
-                    <th
-                      scope="row"
-                      className="whitespace-nowrap px-6 py-4 font-medium text-gray-900  dark:text-white"
+              {causes.length > 0 &&
+                causes?.map((show, index) => {
+                  return (
+                    <tr
+                      className="text-slate-10 border-b border-gray-200 font-sans font-semibold dark:border-gray-700"
+                      key={index}
                     >
-                      Name
-                    </th>
-                    <td className="text-slate-10 px-6 py-4 font-sans font-semibold">
-                      100
-                    </td>
-                    <td className="px-6 py-4 ">100 wei</td>
-                    <td className="px-6 py-4">xacfde4gd</td>
-                    <td className="px-6 py-4">No</td>
-                  </tr>
-                );
-              })}
+                      <th
+                        scope="row"
+                        className="whitespace-nowrap px-6 py-4 font-medium text-gray-900  dark:text-white"
+                      >
+                        {show[0]}
+                      </th>
+                      <td className="text-slate-10 px-6 py-4 font-sans font-semibold">
+                        {show[1]}
+                      </td>
+                      <td className="px-6 py-4 "> {show[2]} wei</td>
+                      <td className="px-6 py-4">{show[3]}</td>
+                      <td className="px-6 py-4">{show[4] ? `Yes` : `No`}</td>
+
+                      {/* <td className="px-6 py-4">No</td> */}
+                    </tr>
+                  );
+                })}
             </tbody>
           </table>
         </div>
